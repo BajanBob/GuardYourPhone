@@ -24,7 +24,11 @@ jobs:
       - uses: actions/setup-java@v4
         with: { distribution: temurin, java-version: '21' }
       - run: npm install --no-audit --no-fund
-      - run: npm run cap:android
+      - name: Create the Android project
+        run: |
+          set +e; npm run cap:android 2>&1 | tee cap.log; s=${PIPESTATUS[0]}
+          if [ $s -ne 0 ]; then echo "::error title=Android project failed::$(tail -n 40 cap.log | tr -d '\r' | sed -e 's/%/%25/g' | sed -e ':a;N;$!ba;s/\n/%0A/g')"; fi
+          exit $s
       - name: Build and sign the APK
         working-directory: android
         env:
