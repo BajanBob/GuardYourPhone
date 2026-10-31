@@ -1,0 +1,9 @@
+{
+  "appId": "bb.guardyourphone.app",
+  "appName": "GuardYourPhone",
+  "webDir": "www",
+  "backgroundColor": "#0b1620",
+  "android": { "allowMixedContent": false, "webContentsDebuggingEnabled": false },
+  "ios": { "contentInset": "never", "webContentsDebuggingEnabled": false },
+  "plugins": { "LocalNotifications": { "iconColor": "#2bd4a4" } }
+}

@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="color-scheme" content="dark">
+  <meta name="theme-color" content="#0b1620">
+  <title>GuardYourPhone</title>
+  <link rel="stylesheet" href="style.css">
+  <script type="module" src="app.js"></script>
+</head>
+<body>
+  <header class="top">
+    <svg class="logo" viewBox="0 0 64 64" aria-hidden="true"><path d="M32 6 52 13v17c0 13-8.6 23-20 28C20.6 53 12 43 12 30V13z" fill="none" stroke="currentColor" stroke-width="4" stroke-linejoin="round"/><path d="M41 27a10 10 0 1 0 1 9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round"/><path d="M43 19v9h-9" fill="none" stroke="currentColor" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    <div><h1>GuardYourPhone</h1><p class="sub">Phone security check-up</p></div>
+  </header>
+  <p id="demo" class="banner" hidden>You’re seeing example results. Install GuardYourPhone on your phone for a real check.</p>
+
+  <main>
+    <section class="card score-card">
+      <div class="ring" id="ring"><span id="score">–</span><small>out of 100</small></div>
+      <div class="score-text">
+        <h2 id="verdict">Not checked yet</h2>
+        <p id="checked" class="muted">Tap “Check my phone” to start. GuardYourPhone only reads settings; it never changes anything without asking you.</p>
+        <button id="run" class="btn primary" type="button">Check my phone</button>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Restart reminders</h2>
+      <p id="uptime" class="big"></p>
+      <p class="muted">Restarting clears spyware and other bad code that hides only in the phone’s memory, and installs waiting updates. Security agencies advise restarting regularly. Apps aren’t allowed to restart a phone by themselves, so GuardYourPhone reminds you at <strong>5:00 am</strong> and <strong>7:00 pm</strong> every day.</p>
+      <label class="switch"><input id="remind" type="checkbox"> <span>Remind me at 5 am and 7 pm</span></label>
+      <p id="remind-msg" class="muted small"></p>
+      <details><summary>How to restart</summary>
+        <ul class="steps">
+          <li><strong>Most Android phones:</strong> press and hold the power button (or power + volume up on newer Samsung and Pixel phones), then tap <em>Restart</em>.</li>
+          <li><strong>iPhone:</strong> press and hold the side button and either volume button, slide to power off, wait 30 seconds, then hold the side button until the Apple logo appears.</li>
+        </ul>
+      </details>
+    </section>
+
+    <section class="card">
+      <h2>What GuardYourPhone found</h2>
+      <ul id="findings" class="findings"><li class="muted">Run a check to see results.</li></ul>
+    </section>
+
+    <section class="card" id="chips-card">
+      <h2>Processors and firmware</h2>
+      <p class="muted small">The application processor runs Android and your apps. The baseband (modem) processor runs the mobile radio with its own firmware, which apps can’t inspect directly; GuardYourPhone shows its firmware version so you can check it’s up to date.</p>
+      <dl id="chips" class="facts"><dt>–</dt><dd>Run a check</dd></dl>
+    </section>
+
+    <section class="card" id="apps-card">
+      <h2>Apps with powerful access</h2>
+      <p class="muted small">Apps that can read your screen, your notifications or texts, control the phone, or that weren’t installed from an app store. Most are fine; remove any you don’t recognise.</p>
+      <ul id="apps" class="apps"><li class="muted">Run a check to see results.</li></ul>
+    </section>
+
+    <section class="card" id="net-card">
+      <h2>Mobile network</h2>
+      <p class="muted small">Checks which network your phone is using. 2G is old and its encryption is weak; fake mobile towers (“IMSI catchers”) often force phones down to 2G.</p>
+      <button id="net" class="btn" type="button">Check mobile network</button>
+      <div id="network"></div>
+    </section>
+
+    <section class="card" id="ios-card" hidden>
+      <h2>iPhone checklist</h2>
+      <p class="muted small">Apple doesn’t let apps look at other apps or security settings, so tick these off yourself.</p>
+      <ul id="ios-list" class="checklist"></ul>
+    </section>
+
+    <section class="card">
+      <h2>Your report</h2>
+      <p class="muted small">Copy the report to send to someone who helps you with your phone. It stays on your phone until you share it.</p>
+      <button id="copy" class="btn" type="button">Copy report</button>
+      <textarea id="report" readonly rows="6" hidden></textarea>
+    </section>
+
+    <p class="foot muted small">GuardYourPhone can’t see everything: no app on an ordinary phone can scan the baseband chip itself or prove a phone is free of spyware. If you think you are being targeted, get help from a trusted security professional. GuardYourPhone sends nothing anywhere.</p>
+  </main>
+  <div id="toast" class="toast" role="status" hidden></div>
+</body>
+</html>

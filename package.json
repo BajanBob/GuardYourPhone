@@ -1,0 +1,25 @@
+{
+  "name": "guardyourphone",
+  "productName": "GuardYourPhone",
+  "version": "1.0.0",
+  "description": "GuardYourPhone: a phone security check-up with twice-daily restart reminders.",
+  "private": true,
+  "license": "UNLICENSED",
+  "scripts": {
+    "core": "node -e \"require('fs').copyFileSync(require.resolve('@capacitor/core/dist/index.js'),'www/capacitor-core.js')\"",
+    "cap:android": "npm run core && cap add android && node scripts/patch-android.mjs && capacitor-assets generate --iconBackgroundColor '#0b1620' --iconBackgroundColorDark '#0b1620' --splashBackgroundColor '#0b1620' --splashBackgroundColorDark '#0b1620' --android && cap sync android",
+    "cap:ios": "npm run core && cap add ios && node scripts/patch-ios.mjs && capacitor-assets generate --iconBackgroundColor '#0b1620' --iconBackgroundColorDark '#0b1620' --splashBackgroundColor '#0b1620' --splashBackgroundColorDark '#0b1620' --ios && cap sync ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "^8.0.0",
+    "@capacitor/core": "^8.0.0",
+    "@capacitor/ios": "^8.0.0",
+    "@capacitor/device": "^8.0.0",
+    "@capacitor/local-notifications": "^8.0.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "^3.0.5",
+    "@capacitor/cli": "^8.0.0",
+    "plist": "^3.1.0"
+  }
+}
