@@ -81,6 +81,24 @@
       <div id="network"></div>
     </section>
 
+    <section class="card" id="codes-card">
+      <h2>Phone service codes</h2>
+      <p class="muted small">Codes you type into the <strong>Phone dialler</strong> to verify your phone and check if your calls are being diverted. <strong>Tap a code to copy it</strong>, then paste it into the keypad. These are for Android / Samsung; on an iPhone only <span class="code" data-copy="*#06#" data-tip="IMEI and serial — works on every phone">*#06#</span> works.</p>
+      <ul class="codes">
+        <li class="coderow"><button class="code" type="button" data-copy="*#06#" data-tip="IMEI and serial number">*#06#</button><span><b>IMEI &amp; serial.</b> Check it at samsung.com/support/imei — it must match your model. Also use it to report a lost or stolen phone.</span></li>
+        <li class="coderow"><button class="code" type="button" data-copy="*#1234#" data-tip="Firmware AP / CP / CSC versions">*#1234#</button><span><b>Firmware (AP / CP / CSC).</b> Confirms a genuine build and your region. A fake phone shows gibberish or nothing.</span></li>
+        <li class="coderow"><button class="code" type="button" data-copy="*#0*#" data-tip="Hardware self-test menu">*#0*#</button><span><b>Hardware test menu.</b> A real Samsung opens a full screen / sensor test; a counterfeit usually can’t. Just exit when done.</span></li>
+        <li class="coderow"><button class="code" type="button" data-copy="*#21#" data-tip="Is call forwarding switched on?">*#21#</button><span><b>Call-forwarding check.</b> Shows if your calls, texts or data are being diverted (a SIM-swap trick). It does <b>not</b> detect spyware.</span></li>
+        <li class="coderow"><button class="code" type="button" data-copy="*#62#" data-tip="Where calls go when unreachable">*#62#</button><span><b>Unreachable forwarding.</b> The number used when your phone is off — should be your voicemail, not a strange number.</span></li>
+        <li class="coderow"><button class="code" type="button" data-copy="##002#" data-tip="Cancel all call forwarding">##002#</button><span><b>Cancel all forwarding.</b> Clears any diversion you find. Safe for normal use.</span></li>
+      </ul>
+      <div class="finding risk" style="margin-top:10px"><div>
+        <p style="margin:0;color:var(--fg)"><b>Never dial a code you don’t recognise.</b></p>
+        <p>Some codes wipe the phone instantly with no warning (for example <span class="nono">*2767*3855#</span> or <span class="nono">*#*#7780#*#*</span>). Never enter a code someone messages you or a website tells you to, and never tap a <span class="nono">tel:</span> link from a stranger.</p>
+      </div></div>
+      <p class="muted small">No dial code can detect modern spyware — anyone claiming a “secret code” shows if you’re hacked is wrong. These codes <strong>verify</strong> your phone; the checks above <strong>protect</strong> it.</p>
+    </section>
+
     <section class="card" id="ios-card" hidden>
       <h2>iPhone checklist</h2>
       <p class="muted small">Apple doesn’t let apps look at other apps or security settings, so tick these off yourself.</p>

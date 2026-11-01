@@ -63,3 +63,12 @@ textarea { width: 100%; margin-top: 10px; background: #0e1b26; color: var(--fg);
 
 .tip { position: fixed; z-index: 2000; pointer-events: none; padding: 7px 10px; border-radius: 8px; background: #24384a; color: #fff; font: 600 .82rem/1.35 system-ui, sans-serif; box-shadow: 0 6px 18px #0006; max-width: 280px; overflow-wrap: anywhere; }
 .tip[hidden] { display: none; }
+
+/* Phone service codes */
+.codes { list-style: none; margin: 6px 0 0; padding: 0; display: grid; gap: 8px; }
+.coderow { display: grid; grid-template-columns: auto 1fr; gap: 10px; align-items: start; }
+.coderow span { color: var(--muted); font-size: .9rem; }
+.coderow span b { color: var(--fg); }
+.code { font-family: ui-monospace, Menlo, Consolas, monospace; font-weight: 700; font-size: .95rem; color: #062018; background: var(--accent); border: none; border-radius: 9px; padding: 7px 10px; cursor: pointer; white-space: nowrap; }
+.code:active { opacity: .8; }
+.nono { font-family: ui-monospace, Menlo, Consolas, monospace; color: #ffc2c8; background: #4a1820; padding: 1px 6px; border-radius: 6px; white-space: nowrap; }
