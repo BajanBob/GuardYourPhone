@@ -1,7 +1,7 @@
 {
   "name": "guardyourphone",
   "productName": "GuardYourPhone",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "description": "GuardYourPhone: a phone security check-up with twice-daily restart reminders.",
   "private": true,
   "license": "UNLICENSED",

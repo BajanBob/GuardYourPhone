@@ -13,6 +13,8 @@ const store = { get: (k, d = null) => { try { const v = localStorage.getItem(k);
 function toast(m, ms = 3500) { const t = $('#toast'); t.textContent = m; t.hidden = false; clearTimeout(toast.t); toast.t = setTimeout(() => { t.hidden = true; }, ms); }
 const DAY = 86400e3;
 import { supportFor, expectedPatch, monthName, howToUpdate } from './support.js';
+import { installTips } from './tips.js';
+installTips();
 
 // ---------- Capacitor (absent in a normal browser: then GuardYourPhone shows example results) ----------
 let platform = 'web', Check = null, Notes = null, Device = null;

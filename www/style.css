@@ -60,3 +60,6 @@ textarea { width: 100%; margin-top: 10px; background: #0e1b26; color: var(--fg);
 .check-item strong { display: block; }
 .check-item p { margin: 2px 0 0; color: var(--muted); font-size: .88rem; }
 .check-item .btn { margin-top: 6px; }
+
+.tip { position: fixed; z-index: 2000; pointer-events: none; padding: 7px 10px; border-radius: 8px; background: #24384a; color: #fff; font: 600 .82rem/1.35 system-ui, sans-serif; box-shadow: 0 6px 18px #0006; max-width: 280px; overflow-wrap: anywhere; }
+.tip[hidden] { display: none; }
