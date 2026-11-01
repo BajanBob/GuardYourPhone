@@ -353,6 +353,13 @@ async function setReminders(on) {
 $('#run').addEventListener('click', run);
 $('#net').addEventListener('click', checkNetwork);
 $('#remind').addEventListener('change', (e) => { setReminders(e.target.checked); if (last) render(last, lastNet); });
+// Tap a service code to copy it, then paste into the dialler (copies only — never dials for you)
+document.addEventListener('click', async (e) => {
+  const c = e.target.closest('.code[data-copy]'); if (!c) return;
+  const code = c.dataset.copy;
+  try { await navigator.clipboard.writeText(code); toast(`Copied ${code} — paste it into the dialler.`); }
+  catch { toast(`Copy ${code} and paste it into the dialler.`); }
+});
 $('#copy').addEventListener('click', async () => {
   const t = $('#report');
   if (!t.value) return toast('Run a check first.');
