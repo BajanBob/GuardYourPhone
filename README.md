@@ -8,6 +8,8 @@ A phone security check-up for Android and iPhone, with restart reminders at **5:
 - Screen lock, encryption, verified boot and bootloader lock, signs of rooting, test-keys builds, USB debugging and developer options.
 - Apps with powerful access: accessibility, device admin, notification access, apps installed from a file, and apps that can read texts or use the microphone. Each has an *App settings* button and an *Uninstall* button.
 - The mobile network: the operator, whether the phone is on 2G, 3G, 4G or 5G, and the cell towers it can see. It warns when the phone is on 2G, which fake towers often force.
+- **Software updates:** compares the phone's patch with the newest monthly patch, shows how many months are missing and roughly how long the model gets updates, with step-by-step update instructions for the maker. A **flashing alert** appears at the top while the phone is out of date or no longer supported.
+- **Protection against spyware and snooping:** it checks for man-in-the-middle signs (added security certificates, proxies, open Wi-Fi, Private DNS), VPN, Advanced Protection and Samsung Auto Blocker. It also has a 19-point checklist covering zero-click attacks through pictures and files (WhatsApp, MMS, LANDFALL-style attacks), snooping on your internet, and fake towers, SIM swaps and IMSI / IMEI exposure (2G off, network security alerts, SIM PIN, carrier SIM-swap PIN, Airplane mode).
 - It works all this into a score out of 100, with a button for each problem that opens the right Settings screen, and a report you can copy.
 
 **On iPhone:** Apple lets apps see only the model and iOS version. GuardYourPhone shows those, gives the restart reminders and a guided security checklist.

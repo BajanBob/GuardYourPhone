@@ -20,7 +20,7 @@ public class MainActivity extends BridgeActivity {
 const p = 'android/app/src/main/AndroidManifest.xml';
 let m = fs.readFileSync(p, 'utf8');
 // QUERY_ALL_PACKAGES: to list every installed app (GuardYourPhone is a security check, sideloaded, not on Google Play).
-for (const perm of ['INTERNET', 'READ_PHONE_STATE', 'ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION', 'QUERY_ALL_PACKAGES', 'REQUEST_DELETE_PACKAGES', 'POST_NOTIFICATIONS', 'RECEIVE_BOOT_COMPLETED']) {
+for (const perm of ['INTERNET', 'READ_PHONE_STATE', 'ACCESS_FINE_LOCATION', 'ACCESS_COARSE_LOCATION', 'QUERY_ALL_PACKAGES', 'REQUEST_DELETE_PACKAGES', 'POST_NOTIFICATIONS', 'RECEIVE_BOOT_COMPLETED', 'ACCESS_WIFI_STATE', 'ACCESS_NETWORK_STATE', 'QUERY_ADVANCED_PROTECTION_MODE']) {
   if (!m.includes(`android.permission.${perm}"`)) m = m.replace('</manifest>', `    <uses-permission android:name="android.permission.${perm}" />\n</manifest>`);
 }
 m = m.replace('</manifest>', '    <uses-feature android:name="android.hardware.telephony" android:required="false" />\n    <uses-feature android:name="android.hardware.location" android:required="false" />\n</manifest>');

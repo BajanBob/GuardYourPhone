@@ -35,6 +35,14 @@ import com.getcapacitor.annotation.CapacitorPlugin;
 import com.getcapacitor.annotation.Permission;
 import com.getcapacitor.annotation.PermissionCallback;
 
+import android.net.ConnectivityManager;
+import android.net.Network;
+import android.net.NetworkCapabilities;
+import android.net.wifi.WifiInfo;
+import android.net.wifi.WifiManager;
+import android.nfc.NfcAdapter;
+import java.security.KeyStore;
+import java.util.Enumeration;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.InputStreamReader;
@@ -138,7 +146,63 @@ public class GuardCheckPlugin extends Plugin {
         if (dpm != null && dpm.getActiveAdmins() != null) for (ComponentName a : dpm.getActiveAdmins()) admins.put(a.getPackageName());
         o.put("deviceAdmins", admins);
         o.put("managed", dpm != null && dpm.isDeviceOwnerApp(c.getPackageName()));
+        protections(c, cr, o);
         call.resolve(o);
+    }
+
+    /** Signs of a man-in-the-middle set-up and the phone's built-in protections (all read-only). */
+    private void protections(Context c, ContentResolver cr, JSObject o) {
+        // Certificates added by a person or an app let whoever holds them read "secure" (https) traffic.
+        JSArray userCas = new JSArray();
+        try {
+            KeyStore ks = KeyStore.getInstance("AndroidCAStore");
+            ks.load(null, null);
+            Enumeration<String> al = ks.aliases();
+            while (al.hasMoreElements()) {
+                String a = al.nextElement();
+                if (a.startsWith("user:")) {
+                    java.security.cert.Certificate cert = ks.getCertificate(a);
+                    String name = a;
+                    if (cert instanceof java.security.cert.X509Certificate) name = ((java.security.cert.X509Certificate) cert).getSubjectX500Principal().getName();
+                    userCas.put(name);
+                }
+            }
+        } catch (Exception ignored) { }
+        o.put("userCaCerts", userCas);
+        o.put("httpProxy", nz(Settings.Global.getString(cr, "http_proxy")));
+        String sysProxy = System.getProperty("http.proxyHost");
+        o.put("systemProxy", sysProxy == null ? "" : sysProxy);
+        o.put("privateDnsMode", nz(Settings.Global.getString(cr, "private_dns_mode")));
+        o.put("privateDnsHost", nz(Settings.Global.getString(cr, "private_dns_specifier")));
+        o.put("bluetoothOn", Settings.Global.getInt(cr, "bluetooth_on", 0) != 0);
+        try { NfcAdapter nfc = NfcAdapter.getDefaultAdapter(c); o.put("nfcOn", nfc != null && nfc.isEnabled()); } catch (Exception ignored) { }
+        try {
+            ConnectivityManager cm = (ConnectivityManager) c.getSystemService(Context.CONNECTIVITY_SERVICE);
+            boolean vpn = false, wifi = false;
+            if (cm != null) for (Network n : cm.getAllNetworks()) {
+                NetworkCapabilities nc = cm.getNetworkCapabilities(n);
+                if (nc == null) continue;
+                if (nc.hasTransport(NetworkCapabilities.TRANSPORT_VPN)) vpn = true;
+                if (nc.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)) wifi = true;
+            }
+            o.put("vpnActive", vpn);
+            o.put("onWifi", wifi);
+            if (wifi && Build.VERSION.SDK_INT >= 31) {
+                WifiManager wm = (WifiManager) c.getApplicationContext().getSystemService(Context.WIFI_SERVICE);
+                WifiInfo wi = wm != null ? wm.getConnectionInfo() : null;
+                if (wi != null) o.put("wifiSecurity", wi.getCurrentSecurityType()); // 0 = open (no password)
+            }
+        } catch (Exception ignored) { }
+        // Android 16 Advanced Protection (Google's strongest setting against spyware and zero-click attacks).
+        try {
+            Object apm = c.getSystemService("advanced_protection");
+            if (apm != null) o.put("advancedProtection", (Boolean) apm.getClass().getMethod("isAdvancedProtectionEnabled").invoke(apm));
+        } catch (Throwable ignored) { }
+        // Samsung Auto Blocker / Message Guard (setting names differ between One UI versions, so this is best effort).
+        for (String k : new String[] { "auto_blocker_enabled", "auto_blocker_setting", "msg_guard_enabled" }) {
+            try { String v = Settings.Secure.getString(cr, k); if (v != null) { o.put("samsungAutoBlocker", !"0".equals(v)); break; } } catch (Exception ignored) { }
+        }
+        o.put("isSamsung", "samsung".equalsIgnoreCase(Build.MANUFACTURER));
     }
 
     private static final String[] WATCH = {

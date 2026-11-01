@@ -17,6 +17,7 @@
   <p id="demo" class="banner" hidden>You’re seeing example results. Install GuardYourPhone on your phone for a real check.</p>
 
   <main>
+    <div id="alert" class="alert" role="alert" hidden></div>
     <section class="card score-card">
       <div class="ring" id="ring"><span id="score">–</span><small>out of 100</small></div>
       <div class="score-text">
@@ -24,6 +25,14 @@
         <p id="checked" class="muted">Tap “Check my phone” to start. GuardYourPhone only reads settings; it never changes anything without asking you.</p>
         <button id="run" class="btn primary" type="button">Check my phone</button>
       </div>
+    </section>
+
+    <section class="card" id="update-card" hidden>
+      <h2>Software updates</h2>
+      <dl id="update-facts" class="facts"></dl>
+      <p id="update-verdict" class="big"></p>
+      <ol id="update-steps" class="numbered"></ol>
+      <button id="update-btn" class="btn" type="button">Check for updates</button>
     </section>
 
     <section class="card">
@@ -43,6 +52,14 @@
     <section class="card">
       <h2>What GuardYourPhone found</h2>
       <ul id="findings" class="findings"><li class="muted">Run a check to see results.</li></ul>
+    </section>
+
+    <section class="card" id="protect-card">
+      <h2>Protection against spyware and snooping</h2>
+      <p class="muted small">Zero-click attacks (like the LANDFALL spyware sent as pictures over WhatsApp), “man-in-the-middle” snooping on your internet, and fake mobile towers that grab your phone’s identity (IMSI and IMEI). GuardYourPhone checks what it can; tick off the rest as you do them.</p>
+      <ul id="auto-checks" class="findings"></ul>
+      <p id="protect-progress" class="big"></p>
+      <div id="protect-list"></div>
     </section>
 
     <section class="card" id="chips-card">
